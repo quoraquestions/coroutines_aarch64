@@ -94,7 +94,6 @@ void sample_coroutine(tinfo_t *ti)
     for (j = 0; j <= 300; j++)
     {
         printf("thread:%d count:%d\n", ti->id, j);
-        ti->scheduled_counter = (uint64_t)-1;
         tyield();
     }
     tend();
