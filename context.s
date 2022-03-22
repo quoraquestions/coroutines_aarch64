@@ -1,6 +1,9 @@
         .text
         .global tswitch
-        //two args r0 old r1 new register info
+        //x0 ptr to current coroutine register state
+        //x1 ptr to new coroutine register state
+        //x2 ptr to scheduled counter
+        //x3 special arg0 for first execution only
 tswitch:
 
         stp x19, x20, [x0], #0x10
@@ -20,6 +23,7 @@ tswitch:
 _notfirst_yield:
 
         adds x3, x4, #1
+        //simple saturating add
         csel x3, x4, x3, eq
         str  x3, [x2]
 
